@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="jquery.min.js"></script>
+    <script>
+        async function show() {
+            try {
+                let data1 = await $.ajax({
+                    url: 'data/1.json',
+                    dataType: 'json'
+                });
+                let data2 = await $.ajax({
+                    url: 'data/2.json',
+                    dataType: 'json'
+                });
+                let data3 = await $.ajax({
+                    url: 'data/3.json',
+                    dataType: 'json'
+                });
+                console.log(data1, data2, data3);
+            } catch (err) {
+                alert(JSON.stringify(err));
+            }
+        }
+        show();
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
