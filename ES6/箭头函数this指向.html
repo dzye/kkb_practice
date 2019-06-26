@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        let json = {
+            a: 10,
+            b: 12,
+            sum: () => {
+                console.log(this);
+                alert(this.a + this.b);
+            }
+        };
+        // alert(json.sum());
+        document.onclick = json.sum;
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

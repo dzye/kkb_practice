@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        window.onload = function () {
+            let but = document.getElementsByTagName("input");
+            for (let i = 0; i < but.length; i++) {
+                but[i].onclick = () => {
+                    alert(i);
+                }
+
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <input type="button" value="a">
+    <input type="button" value="b">
+    <input type="button" value="c">
+    <input type="button" value="d">
+</body>
+
+</html>
