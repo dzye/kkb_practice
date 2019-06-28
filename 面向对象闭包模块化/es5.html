@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        function Person(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+        Person.prototype.show = function () {
+            alert(this.name);
+            alert(this.age);
+        }
+        // var p = new Person('张三', 18);
+        // p.show()
+
+        function worker(name, age, job) {
+            Person.call(this, name, age);
+            this.job = job;
+        }
+
+        worker.prototype = new Person();
+        worker.prototype.constructor = worker;
+        worker.prototype.showJob = function () {
+            alert(this.job);
+        }
+        var w = new worker('wangwu', 44, 'daza');
+        w.show();
+        w.showJob();
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
