@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        window.onload = function () {
+            let inp1 = document.getElementById("inp1");
+            let but1 = document.getElementById("but1");
+            let reg = /^(\d|[1-9]\d{1,3})$/;
+            but1.onclick = function () {
+                if (reg.test(inp1.value)) {
+                    alert("true");
+                } else {
+                    alert("false");
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <input type="text" id="inp1">
+    <button id="but1">检验0-9999</button>
+</body>
+
+</html>
