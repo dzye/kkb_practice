@@ -6,11 +6,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script src="http://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(function () {
+            $("#regButton").click(() => {
+                $.ajax({
+                    type: 'get',
+                    url: 'http://localhost:8010/reg',
+                    data: {
+                        username: $("#username").val(),
+                        password: $("#password").val()
+                    },
+                    dataType: "json"
+                }).then(json => {
+                    alert(json.msg);
+                }, err => {
+                    alert(JSON.stringify(err));
+                })
+            });
+            $("#loginButton").click(() => {
+                $.ajax({
+                    type: 'get',
+                    url: 'http://localhost:8010/login',
+                    data: {
+                        username: $("#username").val(),
+                        password: $("#password").val()
+                    },
+                    dataType: "json"
+                }).then(json => {
+                    alert(json.msg);
+                }, err => {
+                    alert(JSON.stringify(err));
+                })
+            })
+        })
+    </script>
 </head>
 
 <body>
-    aaaaa
-    <img src="./a.png" alt="a">
+    用户名：<input type="text" id="username"></br>
+    密码： <input type="password" id="password"></br>
+    <input type="button" value="注册" id="regButton">
+    <input type="button" value="登录" id="loginButton">
 </body>
 
 </html>
