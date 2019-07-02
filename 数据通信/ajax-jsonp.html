@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../ES6/jquery.min.js" charset="utf-8"></script>
+    <script>
+        $(function () {
+            $("#inp1").on("input", function () {
+                $.ajax({
+                    url: "https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su",
+                    data: {
+                        wd: $(this).val()
+                    },
+                    dataType: "jsonp",
+                    jsonp: "cb"
+                }).then(({
+                    s
+                }) => {
+                    console.log(s);
+                }, err => {
+                    console.log("失败");
+                });
+            })
+        });
+    </script>
+</head>
+
+<body>
+    <input type="text" id="inp1">
+</body>
+
+</html>
