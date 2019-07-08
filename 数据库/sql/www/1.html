@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="http://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+    <script>
+        $(function () {
+            $("#but").click(async () => {
+                let data = await $.ajax({
+                    url: 'http://localhost:8080/reg',
+                    data: {
+                        username: $("#username").val(),
+                        password: $("#password").val()
+                    },
+                })
+                alert(data);
+            })
+        })
+    </script>
+    <input type="text" name="username" id="username"></br>
+    <input type="password" name="password" id="password"></br>
+    <input type="button" value="注册" id="but">
+</body>
+
+</html>
