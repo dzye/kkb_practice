@@ -3,7 +3,7 @@ const fs = require('await-fs');
 const path = require('path');
 const common = require('../../libs/common');
 let router = new Router();
-
+const table = 'banner_table';
 router.get('/login', async ctx => {
     await ctx.render('admin/login', {
         HTTP_ROOT: ctx.config.HTTP_ROOT,
@@ -17,7 +17,7 @@ router.post('/login', async ctx => {
     let {
         username,
         password
-    } = await ctx.request.fields;
+    } = ctx.request.fields; //不需要await
 
     let admins = JSON.parse((await fs.readFile(path.resolve(__dirname, '../../admins.json'))).toString());
 
@@ -45,18 +45,56 @@ router.all('*', async (ctx, next) => {
         HTTP_ROOT
     } = ctx.config;
     if (ctx.session['admin']) {
-        next();
+        await next(); //需要await
     } else {
         ctx.redirect(`${HTTP_ROOT}/admin/login`);
     }
 })
+router.get('/', async ctx => {
+    let {
+        HTTP_ROOT
+    } = ctx.config;
+    ctx.redirect(`${HTTP_ROOT}/admin/banner`);
+})
+const fields = [{
+        title: '标题',
+        name: 'title',
+        type: 'text'
+    },
+    {
+        title: '图片',
+        name: 'src',
+        type: 'file'
+    },
+    {
+        title: '链接',
+        name: 'href',
+        type: 'text'
+    },
+    {
+        title: '序号',
+        name: 'serial',
+        type: 'number'
+    },
+];
 router.get('/banner', async ctx => {
-    ctx.body = 'aaa';
-})
-router.get('/catalog', async ctx => {
-    ctx.body = 'bbb';
-})
-router.get('/artical', async ctx => {
-    ctx.body = 'ccc';
-})
+    const {
+        HTTP_ROOT
+    } = ctx.config;
+
+    let datas = await ctx.db.query(`SELECT * FROM ${table}`);
+    await ctx.render('admin/table', {
+        HTTP_ROOT,
+        type: 'view',
+        datas,
+        action: `${HTTP_ROOT}/admin/banner`,
+        fields
+    })
+});
+// router.get('/catalog', async ctx => {
+//     ctx.body = 'bbb';
+// })
+// router.get('/artical', async ctx => {
+//     ctx.body = 'ccc';
+// })
 module.exports = router.routes();

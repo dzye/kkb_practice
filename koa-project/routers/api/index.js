@@ -1,7 +1,5 @@
-const Router = require('koa-router');
-let router = new Router();
+const Router=require('koa-router');
 
-router.get('/api', async ctx => {
-    ctx.body = '111';
-})
-module.exports = router.routes();
+let router=new Router();
+
+module.exports=router.routes();
