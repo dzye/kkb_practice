@@ -6,13 +6,14 @@ const path = require('path');
 const session = require('koa-session');
 const fs = require('fs');
 const ejs = require('koa-ejs');
+const config = require('./config')
 
 let server = new Koa();
 server.listen(8080);
 
 //中间件
 server.use(body({
-    uploadDir: path.resolve(__dirname, './static/upload')
+    uploadDir: config.UPLOAD_DIR
 }));
 
 server.keys = fs.readFileSync('.keys').toString().split('\n');

@@ -91,10 +91,81 @@ router.get('/banner', async ctx => {
         fields
     })
 });
-// router.get('/catalog', async ctx => {
-//     ctx.body = 'bbb';
-// })
-// router.get('/artical', async ctx => {
-//     ctx.body = 'ccc';
-// })
+router.post('/banner', async ctx => {
+    const {
+        HTTP_ROOT
+    } = ctx.config;
+    let {
+        title,
+        src,
+        href,
+        serial
+    } = ctx.request.fields;
+    src = path.basename(src[0].path);
+    await ctx.db.query(`INSERT INTO banner_table (title,src,href,serial) VALUES (?,?,?,?)`, [title, src, href, serial]);
+    ctx.redirect(`${HTTP_ROOT}/admin/banner`)
+});
+router.get('/banner/delete/:id', async ctx => {
+    const {
+        HTTP_ROOT,
+        UPLOAD_DIR
+    } = ctx.config;
+    let {
+        id
+    } = ctx.params;
+    let data = await ctx.db.query(`SELECT * FROM ${table} WHERE ID=?`, [id]);
+    ctx.assert(data.length, 400, 'no data');
+    if (data.length === 0) {
+        ctx.body = 'no data';
+    } else {
+        let src = data[0].src;
+        await fs.unlink(path.resolve(UPLOAD_DIR, src));
+        await ctx.db.query(`DELETE FROM ${table} WHERE ID=?`, [id]);
+        ctx.redirect(`${HTTP_ROOT}/admin/banner`);
+    }
+});
+router.get('/banner/modify/:id/', async ctx => {
+    let {
+        id
+    } = ctx.params;
+    const {
+        HTTP_ROOT
+    } = ctx.config;
+    let data = await ctx.db.query(`SELECT * FROM ${table} WHERE ID=?`, [id]);
+    ctx.assert(data.length, 400, 'no data');
+
+    let row = data[0];
+    await ctx.render('admin/table', {
+        HTTP_ROOT,
+        type: 'modify',
+        old_data: row,
+        action: `${HTTP_ROOT}/admin/banner/modify/${id}`,
+        fields
+    })
+})
+router.post('/banner/modify/:id/', async ctx => {
+    let {
+        id
+    } = ctx.params;
+    let data = await ctx.db.query(`SELECT * FROM ${table} WHERE ID=?`, [id]);
+    let row = data[0];
+    const {
+        HTTP_ROOT
+    } = ctx.config;
+    let {
+        title,
+        src,
+        href,
+        serial
+    } = ctx.request.fields;
+    if (src) {
+        src = row.src;
+    } else {
+        await fs.unlink(path.resolve(UPLOAD_DIR, src));
+    }
+    console.log(title, src, href, serial);
+    await ctx.db.query(`UPDATE ${table} SET title=?,src=?,href=?,serial=? WHERE ID=${id}`, [title, src, href, serial]);
+    ctx.redirect(`${HTTP_ROOT}/admin/banner`);
+})
+
 module.exports = router.routes();
