@@ -1,0 +1,38 @@
+{
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "autoprefixer": "^9.6.1",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.1.0",
+    "eslint": "^6.0.1",
+    "eslint-loader": "^2.2.1",
+    "file-loader": "^4.1.0",
+    "jest": "^24.8.0",
+    "jest-webpack": "^0.5.1",
+    "jquery": "^3.4.1",
+    "less": "^3.9.0",
+    "less-loader": "^5.0.0",
+    "postcss-loader": "^3.0.0",
+    "style-loader": "^0.23.1",
+    "url-loader": "^2.1.0",
+    "webpack": "^4.36.1",
+    "webpack-cli": "^3.3.6",
+    "webpack-dev-server": "^3.7.2"
+  },
+  "name": "webpack",
+  "version": "1.0.0",
+  "main": "webpack.config.js",
+  "dependencies": {
+    "_jquery@3.4.1@jquery": "^3.4.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server",
+    "test": "jest-webpack"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

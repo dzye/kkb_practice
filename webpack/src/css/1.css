@@ -1,0 +1,16 @@
+body {
+    background: url('../image/a.png') no-repeat;
+}
+
+#div1 {
+    width: 200px;
+    height: 200px;
+    transform: rotate(0deg);
+    border: 1px solid black;
+    transition: 1s all ease;
+    background: #fff;
+}
+
+#div1:hover {
+    transform: rotate(90deg);
+}
