@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="div1">
+        姓名：{{name}}<br>
+        年龄：{{age}}
+    </div>
+</body>
+<script type="text/javascript">
+let el = document.getElementById('div1');
+let template = el.innerHTML;
+let _data = {
+    name: 'dzye',
+    age: 18,
+}
+render();
+let data = new Proxy(_data, {
+    set(obj, key, val) {
+        obj[key] = val;
+        render();
+    }
+})
+
+function render() {
+    el.innerHTML = template.replace(/\{\{\w+\}\}/g, str => {
+        return _data[str.substring(2, str.length - 2)];
+    })
+}
+data.age = 19;
+</script>
+
+</html>
