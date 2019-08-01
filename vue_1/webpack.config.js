@@ -6,7 +6,7 @@ module.exports = {
         path: path.resolve(__dirname, './build'),
         filename: 'bound.min.js'
     },
-    module: {
+    modules: {
         rules: [{
             test: /\.css$/i,
             use: ['style-loader', 'css-loader']
